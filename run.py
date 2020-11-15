@@ -1,3 +1,4 @@
 import src.main as run
 
-run.main()
+if __name__ == "__main__":
+    run.main()
