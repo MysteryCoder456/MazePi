@@ -7,7 +7,7 @@ class Sensor:
         self.trig = trig_pin
         self.echo = echo_pin
 
-    def setup():
+    def setup(self):
         GPIO.setup(self.trig, GPIO.OUT)
         GPIO.setup(self.echo, GPIO.IN)
 
