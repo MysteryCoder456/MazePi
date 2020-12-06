@@ -19,29 +19,28 @@ RB = 8
 FRONT_TRIG = 17
 FRONT_ECHO = 27
 
+# Initialize objects
+car_controller = CarController(LA, LB, RA, RB)
+front_sensor = Sensor(FRONT_TRIG, FRONT_ECHO)
+
 
 def main():
-    # Initialize objects
-    car_controller = CarController(LA, LB, RA, RB)
-    sensor = Sensor(FRONT_TRIG, FRONT_ECHO)
-
     # Setup GPIO
     GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(DEBUG_LED, GPIO.OUT)
     car_controller.setup()
-    sensor.setup()
+    front_sensor.setup()
 
     # Start up sequence
     print("Starting...")
-    for i in range(3):
+    for _ in range(3):
         GPIO.output(DEBUG_LED, GPIO.HIGH)
         time.sleep(0.5)
         GPIO.output(DEBUG_LED, GPIO.LOW)
         time.sleep(0.5)
 
-    dist = sensor.distance()
-    print(dist)
-
-    # Cleanup GPIO
-    GPIO.cleanup()
+    while True:
+        time.sleep(0.05)
+        front_dist = front_sensor.distance()
+        print(front_dist)

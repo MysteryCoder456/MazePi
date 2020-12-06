@@ -13,7 +13,7 @@ class Sensor:
 
     def distance(self):
         GPIO.output(self.trig, GPIO.HIGH)
-        time.sleep(0.0001)
+        time.sleep(0.0005)
         GPIO.output(self.trig, GPIO.LOW)
 
         while not GPIO.input(self.echo):
@@ -25,4 +25,3 @@ class Sensor:
         sig_time = end - start
         dist = sig_time / 0.000058
         return dist
-

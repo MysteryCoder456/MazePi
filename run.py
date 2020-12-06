@@ -1,4 +1,8 @@
+import RPi.GPIO as GPIO
 import src.main as run
 
 if __name__ == "__main__":
-    run.main()
+    try:
+        run.main()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
