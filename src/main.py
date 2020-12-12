@@ -8,7 +8,7 @@ from src.carcontroller import CarController
 from src.sensor import Sensor
 
 # This LED will be used to signal whether there is an error in the program during execution.
-DEBUG_LED = 7
+DEBUG_LED = 16
 
 # These pins are to control the L298N module.
 LA = 23
@@ -16,11 +16,15 @@ LB = 24
 RA = 25
 RB = 8
 
-FRONT_TRIG = 17
-FRONT_ECHO = 27
+LEFT_TRIG = 17
+LEFT_ECHO = 27
+
+FRONT_TRIG = 22
+FRONT_ECHO = 10
 
 # Initialize objects
 car_controller = CarController(LA, LB, RA, RB)
+left_sensor = Sensor(LEFT_TRIG, LEFT_ECHO)
 front_sensor = Sensor(FRONT_TRIG, FRONT_ECHO)
 
 
@@ -30,6 +34,7 @@ def main():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(DEBUG_LED, GPIO.OUT)
     car_controller.setup()
+    left_sensor.setup()
     front_sensor.setup()
 
     # Start up sequence
@@ -42,5 +47,8 @@ def main():
 
     while True:
         time.sleep(0.05)
+        left_dist = left_sensor.distance()
         front_dist = front_sensor.distance()
-        print(front_dist)
+        right_dist = 0.0
+        print(left_dist, front_dist, right_dist)
+
