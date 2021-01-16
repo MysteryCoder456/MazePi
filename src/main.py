@@ -22,10 +22,14 @@ LEFT_ECHO = 27
 FRONT_TRIG = 22
 FRONT_ECHO = 10
 
+RIGHT_TRIG = 9
+RIGHT_ECHO = 11
+
 # Initialize objects
 car_controller = CarController(LA, LB, RA, RB)
 left_sensor = Sensor(LEFT_TRIG, LEFT_ECHO)
 front_sensor = Sensor(FRONT_TRIG, FRONT_ECHO)
+right_sensor = Sensor(RIGHT_TRIG, RIGHT_ECHO)
 
 
 def main():
@@ -36,6 +40,7 @@ def main():
     car_controller.setup()
     left_sensor.setup()
     front_sensor.setup()
+    right_sensor.setup()
 
     # Start up sequence
     print("Starting...")
@@ -49,6 +54,6 @@ def main():
         time.sleep(0.05)
         left_dist = left_sensor.distance()
         front_dist = front_sensor.distance()
-        right_dist = 0.0
+        right_dist = right_sensor.distance()
         print(left_dist, front_dist, right_dist)
 
